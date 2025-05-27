@@ -37,14 +37,39 @@ This MCP server exposes three main validation tools:
 ## Prerequisites
 
 - Python 3.11+
+- [uv](https://docs.astral.sh/uv/) (fast Python package installer)
 - Abstract API key (get one at [abstractapi.com](https://abstractapi.com))
 
 ## Installation
 
+### Option 1: Using uv (Recommended)
+
+
+2. Clone the repository:
+```bash
+git clone https://github.com/avivshafir/abstractapi-mcp-server
+cd abstractapi-mcp-server
+```
+
+3. Create virtual environment and install dependencies:
+```bash
+uv venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+uv pip install .
+```
+
+4. Set up environment variables:
+```bash
+cp .env.example .env
+# Edit .env and add your Abstract API key
+```
+
+### Option 2: Using traditional pip
+
 1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd mcp-abstract-api
+git clone https://github.com/avivshafir/abstractapi-mcp-server
+cd abstractapi-mcp-server
 ```
 
 2. Create a virtual environment:
@@ -76,7 +101,11 @@ ABSTRACT_API_KEY=your_abstract_api_key_here
 The server can be run in stdio mode for integration with MCP clients:
 
 ```bash
+# With uv (if virtual environment is activated)
 python server.py
+
+# Or run directly with uv
+uv run server.py
 ```
 
 ### FastMCP Framework
@@ -224,9 +253,23 @@ Provides comprehensive email reputation analysis including security insights and
 
 ## Integration with MCP Clients
 
-### Claude Desktop
+Add this server to your mcp configuration:
 
-Add this server to your Claude Desktop configuration:
+```json
+{
+  "mcpServers": {
+    "abstract-api": {
+      "command": "uv",
+      "args": ["run", "/path/to/mcp-abstract-api/server.py"],
+      "env": {
+        "ABSTRACT_API_KEY": "your_api_key_here"
+      }
+    }
+  }
+}
+```
+
+Alternatively, if you prefer to use the traditional approach:
 
 ```json
 {
@@ -272,7 +315,9 @@ mcp-abstract-api/
 ├── server.py          # Main MCP server implementation
 ├── .env              # Environment variables (not in repo)
 ├── .env.example      # Environment template
-├── requirements.txt  # Python dependencies
+├── requirements.txt  # Python dependencies (pip format)
+├── uv.lock           # uv lock file for reproducible builds
+├── pyproject.toml    # Project configuration
 ├── README.md         # This file
 └── LICENSE          # MIT License
 ```
