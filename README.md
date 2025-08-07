@@ -2,6 +2,10 @@
 
 A Model Context Protocol (MCP) server that provides email and phone validation tools using Abstract API services. This server is built with FastMCP, making it easy to integrate validation capabilities into AI applications and workflows.
 
+<a href="https://glama.ai/mcp/servers/@avivshafir/abstractapi-mcp-server">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@avivshafir/abstractapi-mcp-server/badge" alt="abstractapi-mcp-server MCP server" />
+</a>
+
 ## Overview
 
 This MCP server exposes three main validation tools:
@@ -43,7 +47,6 @@ This MCP server exposes three main validation tools:
 ## Installation
 
 ### Option 1: Using uv (Recommended)
-
 
 2. Clone the repository:
 ```bash
